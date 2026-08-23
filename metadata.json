@@ -1,0 +1,6 @@
+{
+  "name": "Nirmaladevi Care",
+  "description": "Industrial and specialty chemical trading catalog, quotation inquiry builder, dilution calculator, and direct connect for Nirmaladevi Care Pvt. Ltd. Morbi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

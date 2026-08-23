@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:translateX="0"
+        android:translateY="0">
+        <!-- Center Emblem Glow Circle -->
+        <path
+            android:fillColor="#1AC8FF00"
+            android:pathData="M54,24 A30,30 0 1,1 53.9,24 Z" />
+        
+        <!-- Chemical Laboratory Flask Shape -->
+        <path
+            android:fillColor="#C8FF00"
+            android:pathData="M48,32 L60,32 L60,42 L72,68 C73.5,71.5 71,76 67,76 L41,76 C37,76 34.5,71.5 36,68 L48,42 Z" />
+        
+        <!-- Liquid level inside Flask -->
+        <path
+            android:fillColor="#0A6EFF"
+            android:pathData="M40.5,63 C44,60 52,65 57,62 C62,59 66,62 67.5,63 L67,76 L41,76 Z" />
+            
+        <!-- Flask Bubbles / Molecules -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M48,68 A2,2 0 1,1 47.9,68 Z M58,66 A1.5,1.5 0 1,1 57.9,66 Z M53,58 A2,2 0 1,1 52.9,58 Z" />
+
+        <!-- Flask Lip / Neck Ring -->
+        <path
+            android:fillColor="#C8FF00"
+            android:pathData="M45,29 L63,29 L63,33 L45,33 Z" />
+            
+        <!-- Small Molecule Atom Accent on top right -->
+        <path
+            android:fillColor="#0A6EFF"
+            android:pathData="M76,33 A4,4 0 1,1 75.9,33 Z" />
+        <path
+            android:fillColor="#C8FF00"
+            android:pathData="M32,38 A3,3 0 1,1 31.9,38 Z" />
+    </group>
+</vector>
