@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nirmaladevi Care — Legal, Policy & Play Store Documentation</title>
+    <title>Nirmaladevi Care — Legal, Policy & Google Play Documentation Center</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -188,125 +188,6 @@
         .footer a:hover {
             text-decoration: underline;
         }
-
-        /* Modal Overlay for details */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 20px 14px;
-        }
-
-        .modal-content {
-            background: #FFFFFF;
-            max-width: 580px;
-            margin: 20px auto;
-            border-radius: 20px;
-            padding: 28px 24px;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(12px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 14px;
-            margin-bottom: 18px;
-        }
-
-        .modal-title {
-            font-size: 19px;
-            font-weight: 800;
-            color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .close-btn {
-            background: #F1F5F9;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--text-dark);
-            transition: all 0.2s;
-        }
-
-        .close-btn:hover {
-            background: #E2E8F0;
-        }
-
-        .modal-body {
-            font-size: 14px;
-            line-height: 1.65;
-            color: #334155;
-            max-height: 70vh;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .modal-body h3 {
-            font-size: 15px;
-            color: var(--primary-blue);
-            margin: 16px 0 6px 0;
-            font-weight: 700;
-        }
-
-        .modal-body p {
-            margin-bottom: 12px;
-        }
-
-        .modal-body ul {
-            padding-left: 20px;
-            margin-bottom: 14px;
-        }
-
-        .modal-body li {
-            margin-bottom: 6px;
-        }
-
-        .highlight-box {
-            background: #F8FAFC;
-            border: 1px solid var(--border-light);
-            border-left: 4px solid var(--accent-blue);
-            padding: 12px 14px;
-            border-radius: 8px;
-            margin: 14px 0;
-            font-size: 13px;
-        }
-
-        .danger-box {
-            background: #FFF5F5;
-            border: 1px solid #FED7D7;
-            border-left: 4px solid var(--danger);
-            padding: 12px 14px;
-            border-radius: 8px;
-            margin: 14px 0;
-            font-size: 13px;
-            color: #9B2C2C;
-        }
     </style>
 </head>
 <body>
@@ -319,10 +200,10 @@
             <p class="app-subtitle">Official Legal, Policy & Google Play Documentation Center</p>
         </div>
 
-        <!-- Navigation Cards -->
+        <!-- Navigation Cards (Standalone Links) -->
         <div class="cards-list">
             <!-- 1. Privacy Policy -->
-            <div class="nav-card" onclick="openModal('privacyModal')">
+            <a href="privacy-policy.html" class="nav-card">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
                         <span class="emoji">🛡️</span> Privacy Policy
@@ -332,10 +213,10 @@
                     </div>
                 </div>
                 <div class="nav-card-arrow">➔</div>
-            </div>
+            </a>
 
             <!-- 2. Terms & Conditions -->
-            <div class="nav-card" onclick="openModal('termsModal')">
+            <a href="terms-and-conditions.html" class="nav-card">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
                         <span class="emoji">📜</span> Terms & Conditions
@@ -345,10 +226,10 @@
                     </div>
                 </div>
                 <div class="nav-card-arrow">➔</div>
-            </div>
+            </a>
 
             <!-- 3. Chemical Safety Disclaimer -->
-            <div class="nav-card" onclick="openModal('safetyModal')">
+            <a href="chemical-safety.html" class="nav-card">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
                         <span class="emoji">⚠️</span> Chemical Safety & Disclaimer
@@ -358,10 +239,10 @@
                     </div>
                 </div>
                 <div class="nav-card-arrow">➔</div>
-            </div>
+            </a>
 
             <!-- 4. Account & Data Deletion -->
-            <div class="nav-card" onclick="openModal('deletionModal')">
+            <a href="data-deletion.html" class="nav-card">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
                         <span class="emoji">🗑️</span> Account & Data Deletion
@@ -371,7 +252,7 @@
                     </div>
                 </div>
                 <div class="nav-card-arrow">➔</div>
-            </div>
+            </a>
         </div>
 
         <!-- Divider -->
@@ -386,164 +267,5 @@
         </div>
     </div>
 
-    <!-- MODAL 1: PRIVACY POLICY -->
-    <div id="privacyModal" class="modal" onclick="closeOnBackdrop(event, 'privacyModal')">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">🛡️ Privacy Policy</div>
-                <button class="close-btn" onclick="closeModal('privacyModal')">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="highlight-box">
-                    <strong>Effective Date:</strong> August 24, 2025<br>
-                    <strong>Application:</strong> Nirmaladevi Care (Android)<br>
-                    <strong>Package:</strong> com.aistudio.nirmaladevicare.cptrade
-                </div>
-                <p><strong>Nirmaladevi Care Pvt. Ltd.</strong> ("we", "our", or "us") operates the Nirmaladevi Care mobile application. This Privacy Policy informs users regarding how we handle information, maintain data safety, and protect privacy in compliance with Google Play Developer Policies and applicable data protection laws.</p>
-                
-                <h3>1. Information We Collect</h3>
-                <p>We do NOT track your GPS in the background or inspect private files. We only process information voluntarily provided by you:</p>
-                <ul>
-                    <li><strong>Quotation Inquiries:</strong> Company/Factory name, delivery location, contact phone number, and chemical requirement notes.</li>
-                    <li><strong>Direct Communications:</strong> Message contents transmitted when you contact our Morbi sales desk via WhatsApp, Phone, or Email.</li>
-                    <li><strong>Local Calculations:</strong> All chemical dilution and specific gravity calculations run 100% on your local device.</li>
-                </ul>
-
-                <h3>2. How We Use Information</h3>
-                <ul>
-                    <li>Generating commercial chemical quotations, invoices, and dispatch schedules.</li>
-                    <li>Providing technical guidance, purity specs (CP, Tech, Food Grade), and Certificates of Analysis (COA).</li>
-                    <li>Facilitating road tanker, IBC tank, and carboy chemical deliveries to your designated plant.</li>
-                </ul>
-
-                <h3>3. No Data Selling / Sharing</h3>
-                <p>We do not sell, rent, or trade your personal or commercial inquiry data to third parties or advertising networks.</p>
-
-                <h3>4. Contact Data Protection Desk</h3>
-                <p>Nirmaladevi Care Pvt. Ltd.<br>
-                Panchasar Road, Morbi, Gujarat – 363641, India<br>
-                Email: <a href="mailto:nirmaladevicarepvtltd@gmail.com">nirmaladevicarepvtltd@gmail.com</a> | Helpline: +91 82003 32632</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 2: TERMS & CONDITIONS -->
-    <div id="termsModal" class="modal" onclick="closeOnBackdrop(event, 'termsModal')">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">📜 Terms & Conditions</div>
-                <button class="close-btn" onclick="closeModal('termsModal')">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="highlight-box">
-                    <strong>Industrial Commercial Terms</strong><br>
-                    Governing chemical quotations, raw material supplies, and logistical transport.
-                </div>
-                <h3>1. Acceptance of Terms</h3>
-                <p>By downloading or utilizing the Nirmaladevi Care application, you agree to comply with and be bound by these commercial terms.</p>
-                
-                <h3>2. Nature of Quotations</h3>
-                <ul>
-                    <li>All quotations generated through this mobile application are indicative inquiry drafts subject to final confirmation based on prevailing raw material market rates, applicable GST (18%/12%), and freight charges to your factory.</li>
-                    <li>Chemical deliveries are fulfilled via authorized industrial road tankers, IBC tanks, or HDPE carboys.</li>
-                </ul>
-
-                <h3>3. Intellectual Property</h3>
-                <p>All product catalogues, chemical formulation tools, branding logos, and UI designs are the intellectual property of Nirmaladevi Care Pvt. Ltd.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 3: CHEMICAL SAFETY & DISCLAIMER -->
-    <div id="safetyModal" class="modal" onclick="closeOnBackdrop(event, 'safetyModal')">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">⚠️ Chemical Safety & Disclaimer</div>
-                <button class="close-btn" onclick="closeModal('safetyModal')">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="danger-box">
-                    <strong>MANDATORY SAFETY NOTICE:</strong><br>
-                    Chemicals listed in our catalogue (such as Sulphuric Acid, Hydrochloric Acid, Hydrofluoric Acid, Nitric Acid, and Caustic Soda) are hazardous industrial substances.
-                </div>
-                <h3>1. Industrial Safety Standards</h3>
-                <p>All chemical products must only be handled by certified factory personnel wearing full Personal Protective Equipment (PPE: acid-resistant gloves, face shield, rubber apron, safety boots) in accordance with government safety norms and official Material Safety Data Sheets (MSDS).</p>
-
-                <h3>2. Dilution Calculator Disclaimer</h3>
-                <p>The Dilution and Mass-Volume calculation tools provided inside this app are mathematical estimation utilities provided in good faith. Plant supervisors must verify exact laboratory titration values and specific gravity before carrying out large-scale batch mixing.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 4: ACCOUNT & DATA DELETION -->
-    <div id="deletionModal" class="modal" onclick="closeOnBackdrop(event, 'deletionModal')">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">🗑️ Account & Data Deletion</div>
-                <button class="close-btn" onclick="closeModal('deletionModal')">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="highlight-box">
-                    <strong>User Data Safety & Deletion Policy</strong><br>
-                    How to clear your local application state or request deletion of quotation inquiries.
-                </div>
-                <h3>1. On-Device Data Clearing</h3>
-                <p>The Nirmaladevi Care app stores your drafts and calculator state locally on your device. You can immediately wipe all data at any time:</p>
-                <ul>
-                    <li>Open your device <strong>Settings</strong> ➔ <strong>Apps</strong> ➔ <strong>Nirmaladevi Care</strong>.</li>
-                    <li>Tap on <strong>Storage & Cache</strong> ➔ <strong>Clear Storage / Clear Data</strong>.</li>
-                </ul>
-
-                <h3>2. Requesting Inquiry Deletion</h3>
-                <p>If you have previously submitted an inquiry via email or WhatsApp and wish to have your contact details purged from our customer registry, email us with the subject <em>"Data Deletion Request"</em>:</p>
-                <p>📧 Email: <a href="mailto:nirmaladevicarepvtltd@gmail.com">nirmaladevicarepvtltd@gmail.com</a></p>
-                <p>All requests are processed within 48 to 72 business hours.</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            history.pushState({ modal: modalId }, '', '#' + modalId.replace('Modal', ''));
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto';
-            if (window.location.hash) {
-                history.replaceState(null, '', window.location.pathname + window.location.search);
-            }
-        }
-
-        function closeOnBackdrop(event, modalId) {
-            if (event.target.id === modalId) {
-                closeModal(modalId);
-            }
-        }
-
-        // Handle browser back button or direct anchor links (#privacy, #terms, #safety, #deletion)
-        window.addEventListener('load', function() {
-            var hash = window.location.hash.replace('#', '');
-            if (hash) {
-                var targetModal = hash + 'Modal';
-                if (document.getElementById(targetModal)) {
-                    openModal(targetModal);
-                }
-            }
-        });
-
-        window.addEventListener('popstate', function(event) {
-            document.querySelectorAll('.modal').forEach(function(m) {
-                m.style.display = 'none';
-            });
-            document.body.style.overflow = 'auto';
-            if (event.state && event.state.modal) {
-                document.getElementById(event.state.modal).style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        });
-    </script>
 </body>
 </html>
