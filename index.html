@@ -51,6 +51,7 @@
             margin: auto;
         }
 
+        /* Top Header */
         .header {
             text-align: center;
             margin-bottom: 32px;
@@ -88,6 +89,7 @@
             font-weight: 500;
         }
 
+        /* Nav Cards */
         .cards-list {
             display: flex;
             flex-direction: column;
@@ -158,6 +160,7 @@
             transform: translateX(3px);
         }
 
+        /* Divider & Footer */
         .footer-divider {
             height: 1px;
             background-color: var(--border-light);
@@ -182,6 +185,11 @@
             font-weight: 600;
         }
 
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal Overlay for details */
         .modal {
             display: none;
             position: fixed;
@@ -304,13 +312,16 @@
 <body>
 
     <div class="container">
+        <!-- App Header -->
         <div class="header">
             <div class="app-icon">🧪</div>
             <h1 class="app-title">Nirmaladevi Care</h1>
             <p class="app-subtitle">Official Legal, Policy & Google Play Documentation Center</p>
         </div>
 
+        <!-- Navigation Cards -->
         <div class="cards-list">
+            <!-- 1. Privacy Policy -->
             <div class="nav-card" onclick="openModal('privacyModal')">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
@@ -323,6 +334,7 @@
                 <div class="nav-card-arrow">➔</div>
             </div>
 
+            <!-- 2. Terms & Conditions -->
             <div class="nav-card" onclick="openModal('termsModal')">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
@@ -335,6 +347,7 @@
                 <div class="nav-card-arrow">➔</div>
             </div>
 
+            <!-- 3. Chemical Safety Disclaimer -->
             <div class="nav-card" onclick="openModal('safetyModal')">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
@@ -347,6 +360,7 @@
                 <div class="nav-card-arrow">➔</div>
             </div>
 
+            <!-- 4. Account & Data Deletion -->
             <div class="nav-card" onclick="openModal('deletionModal')">
                 <div class="nav-card-content">
                     <div class="nav-card-title">
@@ -360,8 +374,10 @@
             </div>
         </div>
 
+        <!-- Divider -->
         <div class="footer-divider"></div>
 
+        <!-- Footer -->
         <div class="footer">
             Developer: <strong>Azaz Madkiya</strong> • Support: <a href="mailto:azazmadkiya@gmail.com">azazmadkiya@gmail.com</a><br>
             <span style="font-size: 11.5px; color: #94A3B8; margin-top: 4px; display: inline-block;">
@@ -507,6 +523,7 @@
             }
         }
 
+        // Handle browser back button or direct anchor links (#privacy, #terms, #safety, #deletion)
         window.addEventListener('load', function() {
             var hash = window.location.hash.replace('#', '');
             if (hash) {
