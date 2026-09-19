@@ -43,7 +43,7 @@ fun ToolsScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(BrandInk),
+            .background(WhiteCanvas),
         contentPadding = PaddingValues(16.dp, 16.dp, 16.dp, 90.dp)
     ) {
         item {
@@ -55,7 +55,7 @@ fun ToolsScreen(
                         letterSpacing = 1.5.sp,
                         fontSize = 11.sp
                     ),
-                    color = BrandAcid
+                    color = AccentBlueDark
                 )
                 Text(
                     text = "Chemical Tools & Safety",
@@ -63,12 +63,12 @@ fun ToolsScreen(
                         fontWeight = FontWeight.Black,
                         fontSize = 24.sp
                     ),
-                    color = Color.White
+                    color = TextPrimary
                 )
                 Text(
                     text = "Essential calculators for plant engineers, factory mixers, and chemical storage safety guidelines.",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.White.copy(alpha = 0.65f),
+                    color = TextSecondary,
                     modifier = Modifier.padding(top = 4.dp)
                 )
             }
@@ -78,8 +78,8 @@ fun ToolsScreen(
         item {
             Card(
                 shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = BrandSteel),
-                border = androidx.compose.foundation.BorderStroke(1.dp, BrandBorderDark),
+                colors = CardDefaults.cardColors(containerColor = WhiteSurface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -88,13 +88,13 @@ fun ToolsScreen(
                             modifier = Modifier
                                 .size(36.dp)
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(BrandAcid),
+                                .background(AccentBlueSoft),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Calculate,
                                 contentDescription = null,
-                                tint = BrandInk,
+                                tint = AccentBlueDark,
                                 modifier = Modifier.size(20.dp)
                             )
                         }
@@ -103,12 +103,12 @@ fun ToolsScreen(
                             Text(
                                 text = "Solution Dilution Calculator",
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                color = Color.White
+                                color = TextPrimary
                             )
                             Text(
                                 text = "Formula: C₁ × V₁ = C₂ × V₂",
                                 style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace),
-                                color = BrandAcid
+                                color = AccentBlueDark
                             )
                         }
                     }
@@ -119,7 +119,7 @@ fun ToolsScreen(
                     Text(
                         text = "Quick Presets:",
                         style = MaterialTheme.typography.labelSmall,
-                        color = Color.White.copy(alpha = 0.6f)
+                        color = TextMuted
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -133,8 +133,8 @@ fun ToolsScreen(
                         items(presets) { (title, stock, target) ->
                             Surface(
                                 shape = RoundedCornerShape(6.dp),
-                                color = BrandSteelLight,
-                                border = androidx.compose.foundation.BorderStroke(0.5.dp, BrandBorderDark),
+                                color = WhiteSurfaceVariant,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
                                 modifier = Modifier.clickable {
                                     stockConc = stock
                                     targetConc = target
@@ -143,8 +143,8 @@ fun ToolsScreen(
                             ) {
                                 Text(
                                     text = title,
-                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
-                                    color = BrandAcid,
+                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp, fontWeight = FontWeight.Bold),
+                                    color = AccentBlueDark,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                 )
                             }
@@ -167,10 +167,12 @@ fun ToolsScreen(
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             modifier = Modifier.weight(1f).testTag("stock_conc_input"),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                focusedBorderColor = BrandAcid,
-                                unfocusedBorderColor = BrandBorderDark
+                                focusedTextColor = TextPrimary,
+                                unfocusedTextColor = TextPrimary,
+                                focusedBorderColor = AccentBlue,
+                                unfocusedBorderColor = WhiteBorder,
+                                focusedLabelColor = AccentBlue,
+                                unfocusedLabelColor = TextMuted
                             ),
                             singleLine = true
                         )
@@ -185,10 +187,12 @@ fun ToolsScreen(
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             modifier = Modifier.weight(1f).testTag("target_conc_input"),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                focusedBorderColor = BrandAcid,
-                                unfocusedBorderColor = BrandBorderDark
+                                focusedTextColor = TextPrimary,
+                                unfocusedTextColor = TextPrimary,
+                                focusedBorderColor = AccentBlue,
+                                unfocusedBorderColor = WhiteBorder,
+                                focusedLabelColor = AccentBlue,
+                                unfocusedLabelColor = TextMuted
                             ),
                             singleLine = true
                         )
@@ -206,10 +210,12 @@ fun ToolsScreen(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         modifier = Modifier.fillMaxWidth().testTag("target_vol_input"),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedTextColor = Color.White,
-                            unfocusedTextColor = Color.White,
-                            focusedBorderColor = BrandAcid,
-                            unfocusedBorderColor = BrandBorderDark
+                            focusedTextColor = TextPrimary,
+                            unfocusedTextColor = TextPrimary,
+                            focusedBorderColor = AccentBlue,
+                            unfocusedBorderColor = WhiteBorder,
+                            focusedLabelColor = AccentBlue,
+                            unfocusedLabelColor = TextMuted
                         ),
                         singleLine = true
                     )
@@ -221,22 +227,22 @@ fun ToolsScreen(
                         if (state.calculationError != null) {
                             Surface(
                                 shape = RoundedCornerShape(8.dp),
-                                color = DangerRed.copy(alpha = 0.15f),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, DangerRed),
+                                color = AccentRedSoft,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, AccentRed),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text(
                                     text = state.calculationError,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = DangerRed,
+                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                                    color = AccentRed,
                                     modifier = Modifier.padding(10.dp)
                                 )
                             }
                         } else if (state.calculatedStockRequired != null && state.calculatedWaterRequired != null) {
                             Surface(
                                 shape = RoundedCornerShape(8.dp),
-                                color = BrandSteelLight,
-                                border = androidx.compose.foundation.BorderStroke(1.dp, BrandAcid.copy(alpha = 0.5f)),
+                                color = AccentBlueSoft,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, AccentBlue.copy(alpha = 0.35f)),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Column(modifier = Modifier.padding(12.dp)) {
@@ -246,7 +252,7 @@ fun ToolsScreen(
                                             fontWeight = FontWeight.Bold,
                                             letterSpacing = 1.sp
                                         ),
-                                        color = BrandAcid
+                                        color = AccentBlueDark
                                     )
                                     Spacer(modifier = Modifier.height(6.dp))
                                     Row(
@@ -256,12 +262,12 @@ fun ToolsScreen(
                                         Text(
                                             text = "Stock Chemical Required:",
                                             style = MaterialTheme.typography.bodyMedium,
-                                            color = Color.White.copy(alpha = 0.8f)
+                                            color = TextSecondary
                                         )
                                         Text(
                                             text = "${state.calculatedStockRequired} Liters",
                                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                            color = BrandAcid
+                                            color = AccentBlueDark
                                         )
                                     }
                                     Spacer(modifier = Modifier.height(4.dp))
@@ -272,12 +278,12 @@ fun ToolsScreen(
                                         Text(
                                             text = "D.M. Water Required:",
                                             style = MaterialTheme.typography.bodyMedium,
-                                            color = Color.White.copy(alpha = 0.8f)
+                                            color = TextSecondary
                                         )
                                         Text(
                                             text = "${state.calculatedWaterRequired} Liters",
                                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                            color = BrandAzureLight
+                                            color = AccentTealDark
                                         )
                                     }
                                 }
@@ -290,8 +296,8 @@ fun ToolsScreen(
                     // Safety Rule
                     Surface(
                         shape = RoundedCornerShape(6.dp),
-                        color = DangerRed.copy(alpha = 0.1f),
-                        border = androidx.compose.foundation.BorderStroke(0.5.dp, DangerRed.copy(alpha = 0.3f)),
+                        color = AccentRedSoft,
+                        border = androidx.compose.foundation.BorderStroke(0.5.dp, AccentRed.copy(alpha = 0.3f)),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row(
@@ -301,14 +307,14 @@ fun ToolsScreen(
                             Icon(
                                 imageVector = Icons.Default.Warning,
                                 contentDescription = null,
-                                tint = DangerRed,
+                                tint = AccentRed,
                                 modifier = Modifier.size(16.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
                                 text = "CRITICAL SAFETY: Always add acid SLOWLY to water with constant stirring. NEVER pour water into concentrated acid!",
                                 style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp, fontWeight = FontWeight.Bold),
-                                color = DangerRed
+                                color = AccentRed
                             )
                         }
                     }
@@ -322,8 +328,8 @@ fun ToolsScreen(
 
             Card(
                 shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = BrandSteel),
-                border = androidx.compose.foundation.BorderStroke(1.dp, BrandBorderDark),
+                colors = CardDefaults.cardColors(containerColor = WhiteSurface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -332,13 +338,13 @@ fun ToolsScreen(
                             modifier = Modifier
                                 .size(36.dp)
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(BrandAzure),
+                                .background(AccentTealSoft),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Scale,
                                 contentDescription = null,
-                                tint = Color.White,
+                                tint = AccentTealDark,
                                 modifier = Modifier.size(20.dp)
                             )
                         }
@@ -347,12 +353,12 @@ fun ToolsScreen(
                             Text(
                                 text = "Tanker / Weight Converter",
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                color = Color.White
+                                color = TextPrimary
                             )
                             Text(
                                 text = "Mass (Kg / MT) = Volume (L) × Specific Gravity",
                                 style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace),
-                                color = BrandAzureLight
+                                color = AccentTealDark
                             )
                         }
                     }
@@ -363,7 +369,7 @@ fun ToolsScreen(
                     Text(
                         text = "Specific Gravity Presets:",
                         style = MaterialTheme.typography.labelSmall,
-                        color = Color.White.copy(alpha = 0.6f)
+                        color = TextMuted
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -381,8 +387,8 @@ fun ToolsScreen(
                         items(densities) { (name, sp) ->
                             Surface(
                                 shape = RoundedCornerShape(6.dp),
-                                color = BrandSteelLight,
-                                border = androidx.compose.foundation.BorderStroke(0.5.dp, BrandBorderDark),
+                                color = WhiteSurfaceVariant,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
                                 modifier = Modifier.clickable {
                                     spGravity = sp
                                     onCalculateMassVolume(tankerVol, sp)
@@ -390,8 +396,8 @@ fun ToolsScreen(
                             ) {
                                 Text(
                                     text = name,
-                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
-                                    color = BrandAzureLight,
+                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp, fontWeight = FontWeight.Bold),
+                                    color = AccentTealDark,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                 )
                             }
@@ -414,10 +420,12 @@ fun ToolsScreen(
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             modifier = Modifier.weight(1f).testTag("tanker_vol_input"),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                focusedBorderColor = BrandAzureLight,
-                                unfocusedBorderColor = BrandBorderDark
+                                focusedTextColor = TextPrimary,
+                                unfocusedTextColor = TextPrimary,
+                                focusedBorderColor = AccentTeal,
+                                unfocusedBorderColor = WhiteBorder,
+                                focusedLabelColor = AccentTealDark,
+                                unfocusedLabelColor = TextMuted
                             ),
                             singleLine = true
                         )
@@ -432,10 +440,12 @@ fun ToolsScreen(
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             modifier = Modifier.weight(1f).testTag("sp_gr_input"),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                focusedBorderColor = BrandAzureLight,
-                                unfocusedBorderColor = BrandBorderDark
+                                focusedTextColor = TextPrimary,
+                                unfocusedTextColor = TextPrimary,
+                                focusedBorderColor = AccentTeal,
+                                unfocusedBorderColor = WhiteBorder,
+                                focusedLabelColor = AccentTealDark,
+                                unfocusedLabelColor = TextMuted
                             ),
                             singleLine = true
                         )
@@ -447,8 +457,8 @@ fun ToolsScreen(
                         if (mv.calculatedMassKg != null && mv.calculatedMassMT != null) {
                             Surface(
                                 shape = RoundedCornerShape(8.dp),
-                                color = BrandSteelLight,
-                                border = androidx.compose.foundation.BorderStroke(1.dp, BrandAzureLight.copy(alpha = 0.5f)),
+                                color = AccentTealSoft,
+                                border = androidx.compose.foundation.BorderStroke(1.dp, AccentTeal.copy(alpha = 0.35f)),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Column(modifier = Modifier.padding(12.dp)) {
@@ -459,12 +469,12 @@ fun ToolsScreen(
                                         Text(
                                             text = "Total Mass in Kilograms:",
                                             style = MaterialTheme.typography.bodyMedium,
-                                            color = Color.White.copy(alpha = 0.8f)
+                                            color = TextSecondary
                                         )
                                         Text(
                                             text = "${mv.calculatedMassKg} kg",
                                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                            color = Color.White
+                                            color = TextPrimary
                                         )
                                     }
                                     Spacer(modifier = Modifier.height(4.dp))
@@ -475,12 +485,12 @@ fun ToolsScreen(
                                         Text(
                                             text = "Metric Tons (MT):",
                                             style = MaterialTheme.typography.bodyMedium,
-                                            color = Color.White.copy(alpha = 0.8f)
+                                            color = TextSecondary
                                         )
                                         Text(
                                             text = "${mv.calculatedMassMT} MT",
                                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                            color = BrandAcid
+                                            color = AccentTealDark
                                         )
                                     }
                                 }
@@ -497,8 +507,8 @@ fun ToolsScreen(
 
             Card(
                 shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = BrandSteel),
-                border = androidx.compose.foundation.BorderStroke(1.dp, BrandBorderDark),
+                colors = CardDefaults.cardColors(containerColor = WhiteSurface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -506,14 +516,14 @@ fun ToolsScreen(
                         Icon(
                             imageVector = Icons.Default.Shield,
                             contentDescription = null,
-                            tint = BrandAcid,
+                            tint = AccentBlueDark,
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Industrial Chemical Safety Rules",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = Color.White
+                            color = TextPrimary
                         )
                     }
 
@@ -524,13 +534,13 @@ fun ToolsScreen(
                         title = "Segregated Storage",
                         desc = "Keep concentrated Acids (HCl, Sulphuric, Nitric) strictly separated from Alkalis (Caustic Soda, Ammonia) to prevent explosive exothermic reactions."
                     )
-                    Divider(color = BrandBorderDark, modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(color = WhiteBorder, modifier = Modifier.padding(vertical = 8.dp))
                     SafetyRuleItem(
                         icon = "🥽",
                         title = "Mandatory PPE",
                         desc = "Chemical safety goggles, neoprene/PVC acid-proof gloves, rubber aprons, and respiratory masks must be worn during unloading & handling."
                     )
-                    Divider(color = BrandBorderDark, modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(color = WhiteBorder, modifier = Modifier.padding(vertical = 8.dp))
                     SafetyRuleItem(
                         icon = "💧",
                         title = "Spillage Neutralization",
@@ -551,12 +561,12 @@ fun SafetyRuleItem(icon: String, title: String, desc: String) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
-                color = Color.White
+                color = TextPrimary
             )
             Text(
                 text = desc,
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, lineHeight = 16.sp),
-                color = Color.White.copy(alpha = 0.7f)
+                color = TextSecondary
             )
         }
     }

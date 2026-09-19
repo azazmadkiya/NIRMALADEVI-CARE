@@ -1,66 +1,42 @@
 package com.example.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = BrandAcid,
-    onPrimary = BrandInk,
-    primaryContainer = BrandSteelLight,
-    onPrimaryContainer = BrandAcid,
-    secondary = BrandAzureLight,
+private val WhiteCombinationColorScheme = lightColorScheme(
+    primary = AccentBlue,
+    onPrimary = Color.White,
+    primaryContainer = AccentBlueSoft,
+    onPrimaryContainer = AccentBlueDark,
+    secondary = AccentTeal,
     onSecondary = Color.White,
-    secondaryContainer = BrandSteel,
-    onSecondaryContainer = Color.White,
-    tertiary = BrandAcid,
-    onTertiary = BrandInk,
-    background = BrandInk,
-    onBackground = Color.White,
-    surface = BrandSteel,
-    onSurface = Color.White,
-    surfaceVariant = BrandSteelLight,
-    onSurfaceVariant = BrandMist,
-    outline = BrandBorderDark,
-    error = DangerRed,
-    onError = Color.White
-)
-
-private val LightColorScheme = lightColorScheme(
-    primary = BrandInk,
-    onPrimary = BrandAcid,
-    primaryContainer = BrandAcid,
-    onPrimaryContainer = BrandInk,
-    secondary = BrandAzure,
-    onSecondary = Color.White,
-    secondaryContainer = BrandMist,
-    onSecondaryContainer = BrandInk,
-    tertiary = BrandAcidDark,
+    secondaryContainer = AccentTealSoft,
+    onSecondaryContainer = AccentTealDark,
+    tertiary = AccentGreen,
     onTertiary = Color.White,
-    background = BrandFog,
-    onBackground = BrandTextDark,
-    surface = Color.White,
-    onSurface = BrandTextDark,
-    surfaceVariant = BrandMist,
-    onSurfaceVariant = BrandMid,
-    outline = BrandBorder,
-    error = DangerRed,
+    background = WhiteCanvas,
+    onBackground = TextPrimary,
+    surface = WhiteSurface,
+    onSurface = TextPrimary,
+    surfaceVariant = WhiteSurfaceVariant,
+    onSurfaceVariant = TextSecondary,
+    outline = WhiteBorder,
+    outlineVariant = WhiteBorderStrong,
+    error = AccentRed,
     onError = Color.White
 )
 
 @Composable
 fun MyApplicationTheme(
-    darkTheme: Boolean = true, // Default to sleek brand dark theme
+    darkTheme: Boolean = false, // Default to White Combination Theme
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
-
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = WhiteCombinationColorScheme,
         typography = Typography,
         content = content
     )
 }
+

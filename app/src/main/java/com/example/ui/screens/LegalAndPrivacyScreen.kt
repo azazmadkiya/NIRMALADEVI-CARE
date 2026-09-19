@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.data.model.CompanyInfo
 import com.example.ui.theme.*
 
 enum class LegalTab(val title: String) {
@@ -43,7 +44,7 @@ fun LegalAndPrivacyScreen(
                     Text(
                         text = "Legal & Privacy Policy",
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                        color = Color.White
+                        color = TextPrimary
                     )
                 },
                 navigationIcon = {
@@ -54,7 +55,7 @@ fun LegalAndPrivacyScreen(
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back",
-                            tint = Color.White
+                            tint = TextPrimary
                         )
                     }
                 },
@@ -66,17 +67,17 @@ fun LegalAndPrivacyScreen(
                         Icon(
                             imageVector = Icons.Default.Email,
                             contentDescription = "Support Email",
-                            tint = BrandAcid
+                            tint = AccentBlue
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = BrandSteel,
-                    titleContentColor = Color.White
+                    containerColor = WhiteSurface,
+                    titleContentColor = TextPrimary
                 )
             )
         },
-        containerColor = BrandInk
+        containerColor = WhiteCanvas
     ) { padding ->
         Column(
             modifier = Modifier
@@ -86,13 +87,13 @@ fun LegalAndPrivacyScreen(
             // Tab Selector
             ScrollableTabRow(
                 selectedTabIndex = selectedTab.ordinal,
-                containerColor = BrandSteel,
-                contentColor = BrandAcid,
+                containerColor = WhiteSurface,
+                contentColor = AccentBlue,
                 edgePadding = 12.dp,
                 indicator = { tabPositions ->
                     TabRowDefaults.SecondaryIndicator(
                         Modifier.tabIndicatorOffset(tabPositions[selectedTab.ordinal]),
-                        color = BrandAcid,
+                        color = AccentBlue,
                         height = 3.dp
                     )
                 }
@@ -105,7 +106,7 @@ fun LegalAndPrivacyScreen(
                             Text(
                                 text = tab.title,
                                 fontWeight = if (selectedTab == tab) FontWeight.Bold else FontWeight.Normal,
-                                color = if (selectedTab == tab) BrandAcid else Color.White.copy(alpha = 0.7f),
+                                color = if (selectedTab == tab) AccentBlueDark else TextSecondary,
                                 fontSize = 12.sp
                             )
                         },
@@ -145,7 +146,7 @@ fun PrivacyPolicyContent() {
     Column {
         PolicyHeader(
             title = "Privacy Policy for Nirmaladevi Care",
-            lastUpdated = "Effective Date: August 23, 2025"
+            lastUpdated = "Effective Date: September 19, 2026 | Version 2.1 (Build 3)"
         )
 
         Spacer(modifier = Modifier.height(14.dp))
@@ -182,7 +183,7 @@ fun PrivacyPolicyContent() {
 
         PolicySection(
             title = "7. Contact Data Protection Officer",
-            body = "If you have questions about this Privacy Policy or wish to request deletion of any inquiry data, contact us at:\n\nNIRMALADEVI CARE PVT. LTD.\nPanchasar Road, Morbi, Gujarat – 363641, India\nEmail: nirmaladevicarepvtltd@gmail.com\nPhone: +91 82003 32632"
+            body = "If you have questions about this Privacy Policy or wish to request deletion of any inquiry data, contact us at:\n\nNIRMALADEVI CARE PVT. LTD.\nPanchasar Road, Morbi, Gujarat – 363641, India\nEmail: ${CompanyInfo.EMAIL}\nHelpline: ${CompanyInfo.PHONE}\nContact 1: ${CompanyInfo.PHONE_1}\nContact 2: ${CompanyInfo.PHONE_2}"
         )
     }
 }
@@ -231,8 +232,8 @@ fun ChemicalDisclaimerContent() {
 
         Surface(
             shape = RoundedCornerShape(8.dp),
-            color = DangerRed.copy(alpha = 0.15f),
-            border = androidx.compose.foundation.BorderStroke(1.dp, DangerRed.copy(alpha = 0.5f)),
+            color = AccentRedSoft,
+            border = androidx.compose.foundation.BorderStroke(1.dp, AccentRed.copy(alpha = 0.4f)),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(14.dp)) {
@@ -240,21 +241,21 @@ fun ChemicalDisclaimerContent() {
                     Icon(
                         imageVector = Icons.Default.Warning,
                         contentDescription = null,
-                        tint = DangerRed,
+                        tint = AccentRed,
                         modifier = Modifier.size(20.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "SAFETY FIRST & REGULATORY NOTICE",
                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                        color = DangerRed
+                        color = AccentRed
                     )
                 }
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = "Chemicals listed in this app (including Sulphuric Acid, Hydrochloric Acid, Hydrofluoric Acid, Nitric Acid, and Caustic Soda) are hazardous industrial substances. They must only be handled by trained factory personnel with appropriate Personal Protective Equipment (PPE) in accordance with government safety norms and Material Safety Data Sheets (MSDS).",
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, lineHeight = 17.sp),
-                    color = Color.White
+                    color = TextPrimary
                 )
             }
         }
@@ -278,15 +279,15 @@ fun PlayStoreComplianceContent(onContactSupportClick: () -> Unit) {
     Column {
         PolicyHeader(
             title = "Google Play Store Compliance & App Info",
-            lastUpdated = "Version 1.0.0 (Production Release)"
+            lastUpdated = "Version 2.1 (Build 3) • Production Release"
         )
 
         Spacer(modifier = Modifier.height(14.dp))
 
         Card(
             shape = RoundedCornerShape(10.dp),
-            colors = CardDefaults.cardColors(containerColor = BrandSteel),
-            border = androidx.compose.foundation.BorderStroke(1.dp, BrandBorderDark),
+            colors = CardDefaults.cardColors(containerColor = WhiteSurface),
+            border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(14.dp)) {
@@ -297,13 +298,21 @@ fun PlayStoreComplianceContent(onContactSupportClick: () -> Unit) {
                         letterSpacing = 1.sp,
                         fontSize = 10.sp
                     ),
-                    color = BrandAcid
+                    color = AccentBlueDark
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 ComplianceRow("App Name", "Nirmaladevi Care")
-                ComplianceRow("Package ID", "com.aistudio.nirmaladevicare.cptrade")
-                ComplianceRow("Developer / Owner", "Nirmaladevi Care Pvt. Ltd.")
+                ComplianceRow("Package ID", "com.nirmaladevicare")
+                ComplianceRow("Version", "2.1 (VersionCode: 3)")
+                ComplianceRow("Developer", "Azaz Madkiya (Azazmadkiya)")
+                ComplianceRow("Corporate Entity", CompanyInfo.LEGAL_NAME)
+                ComplianceRow("GSTIN", CompanyInfo.GST_NUMBER)
+                ComplianceRow("MSME (Udyam)", CompanyInfo.MSME_NUMBER)
+                ComplianceRow("Principal Banker", "${CompanyInfo.BANK_NAME} (${CompanyInfo.BANK_BRANCH})")
                 ComplianceRow("Category", "Business / Industrial & Chemical Trading")
+                ComplianceRow("Primary Helpline", CompanyInfo.PHONE)
+                ComplianceRow("Contact Number 1", CompanyInfo.PHONE_1)
+                ComplianceRow("Contact Number 2", CompanyInfo.PHONE_2)
                 ComplianceRow("Target Android Version", "Android 14 / 15 / 16 (API 36)")
                 ComplianceRow("Data Safety", "No tracking, No Ads, User-initiated Inquiry Only")
             }
@@ -318,8 +327,8 @@ fun PlayStoreComplianceContent(onContactSupportClick: () -> Unit) {
                 .height(46.dp)
                 .testTag("compliance_support_button"),
             colors = ButtonDefaults.buttonColors(
-                containerColor = BrandAcid,
-                contentColor = BrandInk
+                containerColor = AccentBlue,
+                contentColor = Color.White
             ),
             shape = RoundedCornerShape(8.dp)
         ) {
@@ -338,15 +347,15 @@ fun PlayStoreComplianceContent(onContactSupportClick: () -> Unit) {
 fun PolicyHeader(title: String, lastUpdated: String) {
     Surface(
         shape = RoundedCornerShape(8.dp),
-        color = BrandSteel,
-        border = androidx.compose.foundation.BorderStroke(1.dp, BrandBorderDark),
+        color = WhiteSurface,
+        border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Black),
-                color = Color.White
+                color = TextPrimary
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
@@ -355,7 +364,7 @@ fun PolicyHeader(title: String, lastUpdated: String) {
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp
                 ),
-                color = BrandAcid
+                color = AccentBlueDark
             )
         }
     }
@@ -367,7 +376,7 @@ fun PolicySection(title: String, body: String) {
         Text(
             text = title,
             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
-            color = BrandAcid
+            color = AccentBlueDark
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
@@ -376,7 +385,7 @@ fun PolicySection(title: String, body: String) {
                 fontSize = 13.sp,
                 lineHeight = 19.sp
             ),
-            color = Color.White.copy(alpha = 0.85f)
+            color = TextSecondary
         )
     }
 }
@@ -392,12 +401,12 @@ fun ComplianceRow(label: String, value: String) {
         Text(
             text = label,
             style = MaterialTheme.typography.bodySmall,
-            color = Color.White.copy(alpha = 0.6f)
+            color = TextMuted
         )
         Text(
             text = value,
             style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-            color = Color.White
+            color = TextPrimary
         )
     }
 }

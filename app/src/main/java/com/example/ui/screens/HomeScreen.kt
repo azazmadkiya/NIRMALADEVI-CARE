@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -21,12 +23,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.data.model.ChemicalProduct
 import com.example.ui.components.*
 import com.example.ui.theme.*
@@ -43,12 +48,14 @@ fun HomeScreen(
     onBrowseProductsClick: () -> Unit,
     onContactClick: () -> Unit,
     onCallClick: () -> Unit,
-    onWhatsAppClick: () -> Unit
+    onWhatsAppClick: () -> Unit,
+    onNavigateToSelection: () -> Unit = {},
+    onOpenCataloguePdf: () -> Unit = {}
 ) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(BrandInk),
+            .background(WhiteCanvas),
         contentPadding = PaddingValues(bottom = 90.dp)
     ) {
         // ── HERO SECTION ──
@@ -56,6 +63,7 @@ fun HomeScreen(
             HeroSection(
                 onBrowseProductsClick = onBrowseProductsClick,
                 onContactClick = onContactClick,
+                onOpenCataloguePdf = onOpenCataloguePdf,
                 onProductFormulaClick = { formula ->
                     onSearchChange(formula)
                 }
@@ -87,6 +95,166 @@ fun HomeScreen(
             }
         }
 
+        // ── ROOM DB CATEGORY SELECTION BANNER ──
+        item {
+            Surface(
+                color = WhiteSurface,
+                shape = RoundedCornerShape(12.dp),
+                border = androidx.compose.foundation.BorderStroke(1.dp, AccentBlue.copy(alpha = 0.35f)),
+                shadowElevation = 1.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                    .clickable { onNavigateToSelection() }
+                    .testTag("home_category_selection_banner")
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(AccentBlueSoft),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Checklist,
+                            contentDescription = "Room Category Selection",
+                            tint = AccentBlueDark,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+                    Column(modifier = Modifier.weight(1f)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(
+                                text = "Category Selection (Room DB)",
+                                style = MaterialTheme.typography.titleSmall.copy(
+                                    color = TextPrimary,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 13.sp
+                                )
+                            )
+                            if (uiState.selectedProductCount > 0) {
+                                Surface(
+                                    color = AccentBlue,
+                                    shape = RoundedCornerShape(10.dp)
+                                ) {
+                                    Text(
+                                        text = "${uiState.selectedProductCount} active",
+                                        style = MaterialTheme.typography.labelSmall.copy(
+                                            color = Color.White,
+                                            fontWeight = FontWeight.Bold,
+                                            fontSize = 9.sp
+                                        ),
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 1.dp)
+                                    )
+                                }
+                            }
+                        }
+                        Text(
+                            text = "Check Acids, Alkalis, Salts & Cleaners with real-time Room DB sync",
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                color = TextMuted,
+                                fontSize = 11.sp
+                            )
+                        )
+                    }
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = "Open Category Selection",
+                        tint = AccentBlueDark,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
+            }
+        }
+
+        // ── OFFICIAL PRODUCT CATALOGUE PDF BANNER ──
+        item {
+            Surface(
+                color = WhiteSurface,
+                shape = RoundedCornerShape(12.dp),
+                border = androidx.compose.foundation.BorderStroke(1.dp, AccentRed.copy(alpha = 0.4f)),
+                shadowElevation = 1.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                    .clickable { onOpenCataloguePdf() }
+                    .testTag("home_product_catalogue_pdf_banner")
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 11.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(AccentRedSoft),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.PictureAsPdf,
+                            contentDescription = "PDF Catalogue",
+                            tint = AccentRed,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                    Column(modifier = Modifier.weight(1f)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(
+                                text = "Official Product Catalogue",
+                                style = MaterialTheme.typography.titleSmall.copy(
+                                    color = TextPrimary,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 13.sp
+                                )
+                            )
+                            Surface(
+                                color = AccentRedSoft,
+                                shape = RoundedCornerShape(4.dp)
+                            ) {
+                                Text(
+                                    text = "PDF DOWNLOAD",
+                                    style = MaterialTheme.typography.labelSmall.copy(
+                                        color = AccentRed,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 8.sp
+                                    ),
+                                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)
+                                )
+                            }
+                        }
+                        Text(
+                            text = "Download 24+ product catalogue PDF & godown details on mobile",
+                            style = MaterialTheme.typography.bodySmall.copy(
+                                color = TextMuted,
+                                fontSize = 11.sp
+                            ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    Icon(
+                        imageVector = Icons.Default.OpenInNew,
+                        contentDescription = "Open PDF",
+                        tint = AccentBlueDark,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+            }
+        }
+
         // ── SECTION HEADER ──
         item {
             Row(
@@ -104,7 +272,7 @@ fun HomeScreen(
                             letterSpacing = 1.5.sp,
                             fontSize = 11.sp
                         ),
-                        color = BrandAcid
+                        color = AccentBlueDark
                     )
                     Text(
                         text = "Chemical Products (${uiState.filteredProducts.size})",
@@ -112,7 +280,7 @@ fun HomeScreen(
                             fontWeight = FontWeight.Black,
                             fontSize = 18.sp
                         ),
-                        color = Color.White
+                        color = TextPrimary
                     )
                 }
             }
@@ -131,20 +299,20 @@ fun HomeScreen(
                         Icon(
                             imageVector = Icons.Default.SearchOff,
                             contentDescription = null,
-                            tint = BrandAcid,
+                            tint = AccentBlue,
                             modifier = Modifier.size(48.dp)
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                         Text(
                             text = "No chemicals match your search",
                             style = MaterialTheme.typography.titleSmall,
-                            color = Color.White
+                            color = TextPrimary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = "Try searching by formula (e.g. HCl, H2SO4, NaOH) or clear filters.",
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.White.copy(alpha = 0.6f)
+                            color = TextMuted
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                         OutlinedButton(
@@ -152,7 +320,8 @@ fun HomeScreen(
                                 onSearchChange("")
                                 onCategorySelect(com.example.data.model.ChemicalCategory.ALL)
                             },
-                            colors = ButtonDefaults.outlinedButtonColors(contentColor = BrandAcid)
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = AccentBlueDark),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, AccentBlue.copy(alpha = 0.5f))
                         ) {
                             Text("Reset Search")
                         }
@@ -189,6 +358,7 @@ fun HomeScreen(
 fun HeroSection(
     onBrowseProductsClick: () -> Unit,
     onContactClick: () -> Unit,
+    onOpenCataloguePdf: () -> Unit = {},
     onProductFormulaClick: (String) -> Unit
 ) {
     Box(
@@ -196,7 +366,7 @@ fun HeroSection(
             .fillMaxWidth()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(BrandInk, BrandSteel)
+                    colors = listOf(Color(0xFFEBF5FF), WhiteCanvas)
                 )
             )
             .padding(16.dp)
@@ -205,8 +375,8 @@ fun HeroSection(
             // Badge
             Surface(
                 shape = RoundedCornerShape(100.dp),
-                color = BrandAcid.copy(alpha = 0.12f),
-                border = androidx.compose.foundation.BorderStroke(1.dp, BrandAcid.copy(alpha = 0.35f)),
+                color = AccentBlueSoft,
+                border = androidx.compose.foundation.BorderStroke(1.dp, AccentBlue.copy(alpha = 0.35f)),
                 modifier = Modifier.padding(bottom = 12.dp)
             ) {
                 Row(
@@ -217,7 +387,7 @@ fun HeroSection(
                         modifier = Modifier
                             .size(7.dp)
                             .clip(CircleShape)
-                            .background(BrandAcid)
+                            .background(AccentBlue)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
@@ -228,10 +398,34 @@ fun HeroSection(
                             letterSpacing = 1.sp,
                             fontSize = 10.sp
                         ),
-                        color = BrandAcid
+                        color = AccentBlueDark
                     )
                 }
             }
+
+            // Official Brand Logo Card
+            Surface(
+                shape = RoundedCornerShape(14.dp),
+                color = Color.White,
+                border = androidx.compose.foundation.BorderStroke(1.dp, AccentBlue.copy(alpha = 0.25f)),
+                shadowElevation = 3.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(96.dp)
+                    .clip(RoundedCornerShape(14.dp))
+                    .testTag("hero_brand_logo")
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ncpl_logo),
+                    contentDescription = "NIRMALA Brand Logo",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(6.dp),
+                    contentScale = ContentScale.Fit
+                )
+            }
+
+            Spacer(modifier = Modifier.height(14.dp))
 
             // Headline
             Text(
@@ -242,7 +436,7 @@ fun HeroSection(
                     lineHeight = 36.sp,
                     letterSpacing = 0.5.sp
                 ),
-                color = Color.White
+                color = TextPrimary
             )
             Text(
                 text = "You Can Trust.",
@@ -251,7 +445,7 @@ fun HeroSection(
                     fontSize = 32.sp,
                     lineHeight = 36.sp
                 ),
-                color = BrandAcid
+                color = AccentBlue
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -262,7 +456,7 @@ fun HeroSection(
                     fontSize = 13.sp,
                     lineHeight = 18.sp
                 ),
-                color = Color.White.copy(alpha = 0.7f)
+                color = TextSecondary
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -270,52 +464,89 @@ fun HeroSection(
             // Action Buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 Button(
                     onClick = onBrowseProductsClick,
                     modifier = Modifier
-                        .weight(1f)
+                        .weight(1.1f)
+                        .height(42.dp)
                         .testTag("hero_browse_button"),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = BrandAcid,
-                        contentColor = BrandInk
+                        containerColor = AccentBlue,
+                        contentColor = Color.White
                     ),
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(8.dp),
+                    contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.ListAlt,
                         contentDescription = null,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(15.dp)
                     )
-                    Spacer(modifier = Modifier.width(6.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "BROWSE 24+",
-                        fontWeight = FontWeight.Black,
-                        fontSize = 12.sp
+                        text = "24+ Products",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 11.5.sp,
+                        maxLines = 1,
+                        softWrap = false
+                    )
+                }
+
+                FilledTonalButton(
+                    onClick = onOpenCataloguePdf,
+                    modifier = Modifier
+                        .weight(1.05f)
+                        .height(42.dp)
+                        .testTag("hero_catalogue_pdf_button"),
+                    colors = ButtonDefaults.filledTonalButtonColors(
+                        containerColor = AccentRedSoft,
+                        contentColor = AccentRed
+                    ),
+                    shape = RoundedCornerShape(8.dp),
+                    contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.PictureAsPdf,
+                        contentDescription = null,
+                        tint = AccentRed,
+                        modifier = Modifier.size(15.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = "PDF Sheet",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 11.5.sp,
+                        maxLines = 1,
+                        softWrap = false
                     )
                 }
 
                 OutlinedButton(
                     onClick = onContactClick,
                     modifier = Modifier
-                        .weight(1f)
+                        .weight(0.95f)
+                        .height(42.dp)
                         .testTag("hero_contact_button"),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, Color.White.copy(alpha = 0.3f)),
-                    shape = RoundedCornerShape(8.dp)
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = AccentBlueDark),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, AccentBlue.copy(alpha = 0.4f)),
+                    shape = RoundedCornerShape(8.dp),
+                    contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.PhoneInTalk,
                         contentDescription = null,
-                        tint = BrandAcid,
-                        modifier = Modifier.size(16.dp)
+                        tint = AccentBlueDark,
+                        modifier = Modifier.size(14.dp)
                     )
-                    Spacer(modifier = Modifier.width(6.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "GET IN TOUCH",
+                        text = "Contact",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp
+                        fontSize = 11.5.sp,
+                        maxLines = 1,
+                        softWrap = false
                     )
                 }
             }
@@ -327,21 +558,21 @@ fun HeroSection(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(8.dp))
-                    .background(BrandInk.copy(alpha = 0.6f))
-                    .border(1.dp, BrandBorderDark, RoundedCornerShape(8.dp))
+                    .background(WhiteSurface)
+                    .border(1.dp, WhiteBorder, RoundedCornerShape(8.dp))
                     .padding(vertical = 10.dp, horizontal = 8.dp),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 StatItem(value = "24+", label = "Products", highlight = "+")
                 Divider(
-                    color = BrandBorderDark,
+                    color = WhiteBorder,
                     modifier = Modifier
                         .height(32.dp)
                         .width(1.dp)
                 )
                 StatItem(value = "B2B / B2C", label = "Bulk & Retail", highlight = "")
                 Divider(
-                    color = BrandBorderDark,
+                    color = WhiteBorder,
                     modifier = Modifier
                         .height(32.dp)
                         .width(1.dp)
@@ -359,7 +590,7 @@ fun HeroSection(
                     fontWeight = FontWeight.Bold,
                     fontSize = 10.sp
                 ),
-                color = Color.White.copy(alpha = 0.5f),
+                color = TextMuted,
                 modifier = Modifier.padding(bottom = 6.dp)
             )
 
@@ -368,8 +599,8 @@ fun HeroSection(
                 items(popularFormulas) { formula ->
                     Surface(
                         shape = RoundedCornerShape(6.dp),
-                        color = BrandSteelLight,
-                        border = androidx.compose.foundation.BorderStroke(1.dp, BrandAcid.copy(alpha = 0.25f)),
+                        color = WhiteSurface,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, AccentBlue.copy(alpha = 0.25f)),
                         modifier = Modifier.clickable { onProductFormulaClick(formula) }
                     ) {
                         Text(
@@ -379,7 +610,7 @@ fun HeroSection(
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 11.sp
                             ),
-                            color = BrandAcid,
+                            color = AccentBlueDark,
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
                         )
                     }
@@ -399,7 +630,7 @@ fun StatItem(value: String, label: String, highlight: String) {
                     fontWeight = FontWeight.Black,
                     fontSize = 15.sp
                 ),
-                color = Color.White
+                color = TextPrimary
             )
             if (highlight.isNotEmpty()) {
                 Text(
@@ -408,14 +639,14 @@ fun StatItem(value: String, label: String, highlight: String) {
                         fontWeight = FontWeight.Black,
                         fontSize = 15.sp
                     ),
-                    color = BrandAcid
+                    color = AccentBlue
                 )
             }
         }
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
-            color = Color.White.copy(alpha = 0.5f)
+            color = TextMuted
         )
     }
 }
@@ -430,8 +661,9 @@ fun ProductCard(
 ) {
     Card(
         shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.cardColors(containerColor = BrandSteel),
-        border = androidx.compose.foundation.BorderStroke(1.dp, BrandBorderDark),
+        colors = CardDefaults.cardColors(containerColor = WhiteSurface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 6.dp)
@@ -452,7 +684,7 @@ fun ProductCard(
                             fontFamily = FontFamily.Monospace,
                             fontSize = 10.sp
                         ),
-                        color = BrandAzureLight
+                        color = AccentBlueDark
                     )
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
@@ -461,7 +693,7 @@ fun ProductCard(
                             fontWeight = FontWeight.Bold,
                             fontSize = 16.sp
                         ),
-                        color = Color.White,
+                        color = TextPrimary,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -469,8 +701,8 @@ fun ProductCard(
 
                 FormulaBadge(
                     formula = product.formula,
-                    backgroundColor = BrandSteelLight,
-                    textColor = BrandAcid
+                    backgroundColor = AccentBlueSoft,
+                    textColor = AccentBlueDark
                 )
             }
 
@@ -479,7 +711,7 @@ fun ProductCard(
             Text(
                 text = product.description,
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, lineHeight = 16.sp),
-                color = Color.White.copy(alpha = 0.65f),
+                color = TextSecondary,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
@@ -496,8 +728,8 @@ fun ProductCard(
                     if (product.hasWholesale) {
                         Surface(
                             shape = RoundedCornerShape(4.dp),
-                            color = BrandAzure.copy(alpha = 0.2f),
-                            border = androidx.compose.foundation.BorderStroke(0.5.dp, BrandAzure.copy(alpha = 0.4f))
+                            color = AccentBlueSoft,
+                            border = androidx.compose.foundation.BorderStroke(0.5.dp, AccentBlue.copy(alpha = 0.3f))
                         ) {
                             Text(
                                 text = "WHOLESALE",
@@ -505,7 +737,7 @@ fun ProductCard(
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 9.sp
                                 ),
-                                color = BrandAzureLight,
+                                color = AccentBlueDark,
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                             )
                         }
@@ -513,8 +745,8 @@ fun ProductCard(
                     if (product.hasRetail) {
                         Surface(
                             shape = RoundedCornerShape(4.dp),
-                            color = BrandAcid.copy(alpha = 0.15f),
-                            border = androidx.compose.foundation.BorderStroke(0.5.dp, BrandAcid.copy(alpha = 0.4f))
+                            color = AccentTealSoft,
+                            border = androidx.compose.foundation.BorderStroke(0.5.dp, AccentTeal.copy(alpha = 0.3f))
                         ) {
                             Text(
                                 text = "RETAIL",
@@ -522,7 +754,7 @@ fun ProductCard(
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 9.sp
                                 ),
-                                color = BrandAcid,
+                                color = AccentTealDark,
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                             )
                         }
@@ -537,7 +769,7 @@ fun ProductCard(
                         Icon(
                             imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                             contentDescription = "Favorite",
-                            tint = if (isFavorite) DangerRed else Color.White.copy(alpha = 0.5f),
+                            tint = if (isFavorite) DangerRed else TextPlaceholder,
                             modifier = Modifier.size(18.dp)
                         )
                     }
@@ -547,8 +779,8 @@ fun ProductCard(
                         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
                         shape = RoundedCornerShape(6.dp),
                         colors = ButtonDefaults.filledTonalButtonColors(
-                            containerColor = BrandAcid,
-                            contentColor = BrandInk
+                            containerColor = AccentBlue,
+                            contentColor = Color.White
                         ),
                         modifier = Modifier
                             .height(32.dp)
@@ -579,8 +811,9 @@ fun InquiryCtaBanner(
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = BrandSteelLight),
-        border = androidx.compose.foundation.BorderStroke(1.dp, BrandAcid.copy(alpha = 0.4f)),
+        colors = CardDefaults.cardColors(containerColor = WhiteSurface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, WhiteBorder),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
@@ -592,19 +825,19 @@ fun InquiryCtaBanner(
             Icon(
                 imageVector = Icons.Default.LocalShipping,
                 contentDescription = null,
-                tint = BrandAcid,
+                tint = AccentBlueDark,
                 modifier = Modifier.size(32.dp)
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = "Need Bulk Road Tanker or Urgent Supply?",
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                color = Color.White
+                color = TextPrimary
             )
             Text(
                 text = "Direct delivery to ceramic factories, industrial units, and chemical processors across Morbi & Gujarat.",
                 style = MaterialTheme.typography.bodySmall,
-                color = Color.White.copy(alpha = 0.7f),
+                color = TextSecondary,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                 modifier = Modifier.padding(vertical = 6.dp)
             )
@@ -635,8 +868,8 @@ fun InquiryCtaBanner(
                     onClick = onCallClick,
                     modifier = Modifier.weight(1f),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = BrandAcid,
-                        contentColor = BrandInk
+                        containerColor = AccentBlue,
+                        contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(8.dp)
                 ) {
@@ -652,3 +885,4 @@ fun InquiryCtaBanner(
         }
     }
 }
+

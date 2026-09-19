@@ -38,9 +38,10 @@ Browse and filter chemical supplies across 4 primary industry categories:
 - Social media links (Facebook, Instagram).
 
 ### 5. ⚖️ Google Play Store Compliance & Privacy Policy
-- Integrated **Legal & Privacy Policy** viewer complying with DPDPA and Google Play Developer Policies.
+- Integrated **Legal & Privacy Policy** viewer complying with India's DPDPA and Google Play Developer Policies.
+- Official [Privacy Policy (Markdown)](PRIVACY_POLICY.md) and [Web Documentation](privacy-policy.html).
 - Chemical handling disclaimers and safety guidance.
-- Ready-to-host HTML document (`app/src/main/assets/privacy_policy.html`).
+- Ready-to-host HTML documents (`privacy-policy.html`, `app/src/main/assets/privacy_policy.html`, `terms-and-conditions.html`, `data-deletion.html`).
 
 ---
 
@@ -97,4 +98,4 @@ Panchasar Road, Morbi, Gujarat – 363641, India
 
 ---
 
-*© 2025 Nirmaladevi Care Pvt. Ltd. All rights reserved.*
+*© 2026 Nirmaladevi Care Pvt. Ltd. • Developed By Azaz Madkiya (Azazmadkiya). All rights reserved.*
