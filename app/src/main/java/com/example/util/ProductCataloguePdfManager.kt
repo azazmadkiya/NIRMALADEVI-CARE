@@ -23,7 +23,10 @@ sealed class DownloadResult {
 }
 
 object ProductCataloguePdfManager {
-    const val FILE_NAME = "Nirmala_Devi_Care_Product_Catalogue.pdf"
+    const val FILE_NAME = "Catalogue NCPL.pdf"
+    const val TARGET_FOLDER_NAME = "NIRMALADEVI CARE"
+    const val DRIVE_LINK = "https://drive.google.com/uc?id=1xQ1EVjfEKvhkGcK9N72mVdWKfNuV06T5"
+    const val DRIVE_VIEW_LINK = "https://drive.google.com/file/d/1xQ1EVjfEKvhkGcK9N72mVdWKfNuV06T5/view?usp=sharing"
 
     /**
      * Generates or retrieves the cached PDF file of the official Product Catalogue.
@@ -31,7 +34,15 @@ object ProductCataloguePdfManager {
     fun getOrCreatePdfFile(context: Context): File {
         val cacheFile = File(context.cacheDir, FILE_NAME)
         if (!cacheFile.exists() || cacheFile.length() == 0L) {
-            generateCataloguePdf(context, cacheFile)
+            try {
+                context.assets.open("documents/catalogue_ncpl.pdf").use { input ->
+                    FileOutputStream(cacheFile).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+            } catch (_: Exception) {
+                generateCataloguePdf(context, cacheFile)
+            }
         }
         return cacheFile
     }
@@ -281,17 +292,18 @@ object ProductCataloguePdfManager {
     }
 
     /**
-     * Downloads the PDF file directly to the user's mobile device Downloads folder.
+     * Downloads the PDF file directly to the user's mobile device Downloads folder inside "NIRMALADEVI CARE".
      */
     fun downloadPdfToDevice(context: Context): DownloadResult {
         return try {
             val sourceFile = getOrCreatePdfFile(context)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val relativePath = "${Environment.DIRECTORY_DOWNLOADS}/$TARGET_FOLDER_NAME"
                 val contentValues = ContentValues().apply {
                     put(MediaStore.Downloads.DISPLAY_NAME, FILE_NAME)
                     put(MediaStore.Downloads.MIME_TYPE, "application/pdf")
-                    put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                    put(MediaStore.Downloads.RELATIVE_PATH, relativePath)
                     put(MediaStore.Downloads.IS_PENDING, 1)
                 }
 
@@ -309,16 +321,26 @@ object ProductCataloguePdfManager {
                 contentValues.put(MediaStore.Downloads.IS_PENDING, 0)
                 resolver.update(uri, contentValues, null, null)
 
+                try {
+                    MediaScannerConnection.scanFile(
+                        context,
+                        arrayOf("/storage/emulated/0/Download/$TARGET_FOLDER_NAME/$FILE_NAME"),
+                        arrayOf("application/pdf"),
+                        null
+                    )
+                } catch (_: Exception) {}
+
                 DownloadResult.Success(
                     uri = uri,
                     file = sourceFile,
-                    message = "Product Catalogue PDF downloaded successfully to device Downloads!",
-                    filePath = "Downloads/$FILE_NAME"
+                    message = "Saved to Downloads/$TARGET_FOLDER_NAME/$FILE_NAME",
+                    filePath = "Downloads/$TARGET_FOLDER_NAME/$FILE_NAME"
                 )
             } else {
                 val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                downloadsDir.mkdirs()
-                val targetFile = File(downloadsDir, FILE_NAME)
+                val targetDir = File(downloadsDir, TARGET_FOLDER_NAME)
+                if (!targetDir.exists()) targetDir.mkdirs()
+                val targetFile = File(targetDir, FILE_NAME)
                 sourceFile.copyTo(targetFile, overwrite = true)
 
                 // Notify media scanner
@@ -333,7 +355,7 @@ object ProductCataloguePdfManager {
                 DownloadResult.Success(
                     uri = uri,
                     file = targetFile,
-                    message = "Product Catalogue PDF downloaded successfully to device Downloads!",
+                    message = "Saved to Downloads/$TARGET_FOLDER_NAME/$FILE_NAME",
                     filePath = targetFile.absolutePath
                 )
             }
@@ -341,6 +363,44 @@ object ProductCataloguePdfManager {
             val sourceFile = getOrCreatePdfFile(context)
             fallbackInternalCopy(context, sourceFile)
         }
+    }
+
+    /**
+     * Opens the official Google Drive link for Catalogue NCPL.pdf
+     */
+    fun openGoogleDrive(context: Context) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DRIVE_VIEW_LINK)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            try {
+                val fallbackIntent = Intent(Intent.ACTION_VIEW, Uri.parse(DRIVE_LINK)).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                context.startActivity(fallbackIntent)
+            } catch (ex: Exception) {
+                Toast.makeText(context, "Google Drive: $DRIVE_VIEW_LINK", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    /**
+     * Shares the Google Drive link for Catalogue NCPL.pdf
+     */
+    fun shareGoogleDriveLink(context: Context) {
+        try {
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, "Catalogue NCPL.pdf - Nirmaladevi Care")
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Download official Catalogue NCPL.pdf from Nirmaladevi Care Pvt. Ltd.:\n$DRIVE_VIEW_LINK"
+                )
+            }
+            context.startActivity(Intent.createChooser(shareIntent, "Share Google Drive Link"))
+        } catch (_: Exception) {}
     }
 
     private fun fallbackInternalCopy(context: Context, sourceFile: File): DownloadResult {

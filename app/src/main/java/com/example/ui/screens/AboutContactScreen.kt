@@ -34,7 +34,10 @@ import android.widget.Toast
 import com.example.R
 import com.example.data.model.CompanyInfo
 import com.example.data.model.SalesDepot
+import com.example.ui.components.CompactDocumentActionRow
+import com.example.ui.components.OfficialDocumentsSection
 import com.example.ui.theme.*
+import com.example.util.CompanyDocumentManager
 import com.example.util.DownloadResult
 import com.example.util.ProductCataloguePdfManager
 
@@ -43,6 +46,7 @@ fun AboutContactScreen(
     onCallClick: () -> Unit,
     onWhatsAppClick: () -> Unit,
     onShareWhatsAppMessage: (String) -> Unit = {},
+    onShareText: (String) -> Unit = {},
     onEmailClick: () -> Unit,
     onOpenMapClick: () -> Unit,
     onOpenDepotMap: (url: String, fallbackAddress: String) -> Unit = { _, _ -> },
@@ -176,6 +180,70 @@ fun AboutContactScreen(
                                     color = TextSecondary
                                 )
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Verified Credentials & Catalogue Overview Card
+        item {
+            Spacer(modifier = Modifier.height(10.dp))
+            Card(
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(containerColor = AccentTealSoft.copy(alpha = 0.35f)),
+                border = androidx.compose.foundation.BorderStroke(1.dp, AccentTealDark.copy(alpha = 0.3f)),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Verified,
+                            contentDescription = null,
+                            tint = AccentTealDark,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Text(
+                            text = "VERIFIED CREDENTIALS & CATALOGUE",
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 1.1.sp,
+                                fontSize = 11.sp
+                            ),
+                            color = AccentTealDark
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = "Check out all official company details and documents below in this About tab:",
+                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                        color = TextSecondary
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    val credentialItems = listOf(
+                        "📦 Products Catalogue (Complete Chemicals & Solvents Range)",
+                        "🛡️ GST Certificate (Verified Government Taxpayer Registration)",
+                        "📜 Udhyam (MSME) Certificate (Govt. of India Enterprise)",
+                        "🏦 Bank Details (Secure RTGS/NEFT/IMPS Banking Info)"
+                    )
+
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        credentialItems.forEach { itemText ->
+                            Text(
+                                text = itemText,
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 11.5.sp
+                                ),
+                                color = TextPrimary
+                            )
                         }
                     }
                 }
@@ -636,7 +704,7 @@ fun AboutContactScreen(
 
                         Button(
                             onClick = {
-                                onShareWhatsAppMessage(CompanyInfo.getFormattedBankDetailsMessage())
+                                onShareText(CompanyInfo.getFormattedBankDetailsMessage())
                             },
                             modifier = Modifier
                                 .weight(1f)
@@ -703,7 +771,7 @@ fun AboutContactScreen(
                                 color = AccentTealDark
                             )
                             Text(
-                                text = "Government Verified Business Credentials",
+                                text = "Government Verified Business Credentials & Certificates",
                                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                                 color = TextSecondary
                             )
@@ -724,7 +792,7 @@ fun AboutContactScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
 
                     // MSME Block
                     RegistrationItemCard(
@@ -739,6 +807,12 @@ fun AboutContactScreen(
                     )
                 }
             }
+        }
+
+        // ── 3. Official Business Documents & PDF Downloads (Folder: NIRMALADEVI CARE) ──
+        item {
+            Spacer(modifier = Modifier.height(10.dp))
+            OfficialDocumentsSection()
         }
 
         // ── 3. Registered Head Office & Facilities (Office & Depots) ──

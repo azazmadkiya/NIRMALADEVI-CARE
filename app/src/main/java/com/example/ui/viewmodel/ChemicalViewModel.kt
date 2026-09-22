@@ -636,9 +636,9 @@ class ChemicalViewModel(
      * Converts all currently checked products in Room DB into Pending Inquiry records in Room DB.
      */
     fun addSelectedProductsToPendingInquiry(
-        userName: String = "Valued Customer",
-        companyName: String = "Industrial Mill",
-        quantity: Int = 10,
+        userName: String = "",
+        companyName: String = "",
+        quantity: Int = 1,
         packagingUnit: String = "Carboy / Drum"
     ) {
         val selected = _uiState.value.selectedProductsInDb.filter { it.isSelected }

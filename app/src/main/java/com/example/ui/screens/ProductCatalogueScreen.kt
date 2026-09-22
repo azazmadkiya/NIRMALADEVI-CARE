@@ -31,7 +31,9 @@ import androidx.compose.ui.unit.sp
 import com.example.data.model.ChemicalCatalog
 import com.example.data.model.ChemicalProduct
 import com.example.data.model.ProductCatalogueData
+import com.example.ui.components.CompanyDocumentDownloadCard
 import com.example.ui.theme.*
+import com.example.util.CompanyDocumentManager
 import com.example.util.DownloadResult
 import com.example.util.ProductCataloguePdfManager
 
@@ -129,6 +131,19 @@ fun ProductCatalogueScreen(
                 },
                 actions = {
                     IconButton(
+                        onClick = { ProductCataloguePdfManager.openGoogleDrive(context) },
+                        modifier = Modifier
+                            .size(36.dp)
+                            .testTag("catalogue_topbar_drive_button")
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.CloudDownload,
+                            contentDescription = "Open Google Drive Link",
+                            tint = AccentBlueDark,
+                            modifier = Modifier.size(19.dp)
+                        )
+                    }
+                    IconButton(
                         onClick = { ProductCataloguePdfManager.openPdf(context) },
                         modifier = Modifier
                             .size(36.dp)
@@ -180,6 +195,45 @@ fun ProductCatalogueScreen(
                     .navigationBarsPadding()
             ) {
                 Column(modifier = Modifier.padding(14.dp)) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 6.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "📁 Folder: Downloads/NIRMALADEVI CARE/",
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontSize = 10.sp,
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = FontWeight.SemiBold
+                            ),
+                            color = AccentBlueDark
+                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(2.dp),
+                            modifier = Modifier.clickable { ProductCataloguePdfManager.openGoogleDrive(context) }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.CloudDownload,
+                                contentDescription = null,
+                                tint = AccentBlueDark,
+                                modifier = Modifier.size(12.dp)
+                            )
+                            Spacer(modifier = Modifier.width(2.dp))
+                            Text(
+                                text = "Drive Link",
+                                style = MaterialTheme.typography.labelSmall.copy(
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold
+                                ),
+                                color = AccentBlueDark
+                            )
+                        }
+                    }
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -342,6 +396,11 @@ fun ProductCatalogueScreen(
                         }
                     }
                 }
+            }
+
+            // Official Document Download Card (Downloads to NIRMALADEVI CARE folder / Google Drive link)
+            item {
+                CompanyDocumentDownloadCard(document = CompanyDocumentManager.DOC_CATALOGUE)
             }
 
             // View Selector: Official Document vs Interactive List

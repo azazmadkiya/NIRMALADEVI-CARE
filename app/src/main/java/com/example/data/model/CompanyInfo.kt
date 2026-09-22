@@ -39,6 +39,23 @@ object CompanyInfo {
     const val GST_NUMBER = "24AAHCN6833G1ZF"
     const val MSME_NUMBER = "UDYAM-GJ-32-0031160"
 
+    // Official Documents & Google Drive Links
+    const val CATALOGUE_PDF_NAME = "Catalogue NCPL.pdf"
+    const val CATALOGUE_DRIVE_URL = "https://drive.google.com/uc?id=1xQ1EVjfEKvhkGcK9N72mVdWKfNuV06T5"
+    const val CATALOGUE_DRIVE_VIEW_URL = "https://drive.google.com/file/d/1xQ1EVjfEKvhkGcK9N72mVdWKfNuV06T5/view?usp=sharing"
+
+    const val GST_PDF_NAME = "Gst Certificate.pdf"
+    const val GST_DRIVE_URL = "https://drive.google.com/uc?id=1eqr6al2DHQx8WmwTVIU8ffXTDvdh5uF8"
+    const val GST_DRIVE_VIEW_URL = "https://drive.google.com/file/d/1eqr6al2DHQx8WmwTVIU8ffXTDvdh5uF8/view?usp=sharing"
+
+    const val MSME_PDF_NAME = "Udyam Certificate (MSME).pdf"
+    const val MSME_DRIVE_URL = "https://drive.google.com/uc?id=1pt4j4p70098X1jA__9SmHEGzn43aYTuh"
+    const val MSME_DRIVE_VIEW_URL = "https://drive.google.com/file/d/1pt4j4p70098X1jA__9SmHEGzn43aYTuh/view?usp=sharing"
+
+    const val BANK_PDF_NAME = "Bank Details.PDF"
+    const val BANK_DRIVE_URL = "https://drive.google.com/uc?id=1lrPU7zp0KtvNn-tcKMDvOTErZL4ymFtu"
+    const val BANK_DRIVE_VIEW_URL = "https://drive.google.com/file/d/1lrPU7zp0KtvNn-tcKMDvOTErZL4ymFtu/view?usp=sharing"
+
     // Address & Contact
     const val ADDRESS = "Panchasar Road, Morbi, Gujarat – 363641, India"
     const val OFFICE_MAP_URL = "https://maps.app.goo.gl/Sx54aiY4ezVeYyqY9"
@@ -49,10 +66,17 @@ object CompanyInfo {
     const val PLAY_STORE_LINK = "https://play.google.com/store/apps/details?id=com.nirmaladevicare"
 
     const val SHARE_APP_MESSAGE = """
-Check out the official NIRMALADEVI CARE app! 
-Download now for industrial chemical catalogues, inquiries, and direct sales desk support.
+🏢 *NIRMALADEVI CARE PVT. LTD.*
+Trusted Industrial Chemical Trading & Solvents Supplier (Morbi, Gujarat)
 
-Download on Google Play:
+Explore our verified business credentials, official catalogues, and direct support via our official mobile app:
+🔹 *Products Catalogue:* Complete Industrial Chemicals & Solvents Range
+🔹 *GST Certificate:* Verified Taxpayer Credentials (GSTIN: 24AABCN...)
+🔹 *Udhyam (MSME) Certificate:* Govt. of India Registered Enterprise
+🔹 *Official Bank Details:* Secure RTGS / NEFT / IMPS Banking Info
+🔹 *Sales Depots & Hubs:* Morbi & Maliya Godowns
+
+📱 *Download & Explore Official App:*
 $PLAY_STORE_LINK
     """
 

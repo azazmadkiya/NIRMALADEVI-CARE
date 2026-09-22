@@ -60,9 +60,9 @@ fun PendingInquiryScreen(
 ) {
     val context = LocalContext.current
 
-    // Form Field States
-    var userName by remember { mutableStateOf(uiState.customerName) }
-    var companyName by remember { mutableStateOf(uiState.companyName) }
+    // Form Field States - strictly blank with no prepopulated default text
+    var userName by remember { mutableStateOf("") }
+    var companyName by remember { mutableStateOf("") }
     var quantityText by remember { mutableStateOf("") }
     var selectedProduct by remember { mutableStateOf(ChemicalCatalog.products.first()) }
     var selectedUnit by remember { mutableStateOf("Carboys (35 kg)") }

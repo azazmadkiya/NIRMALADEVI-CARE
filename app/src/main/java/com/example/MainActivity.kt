@@ -170,6 +170,38 @@ fun MainAppScreen(viewModel: ChemicalViewModel) {
         }
     }
 
+    fun shareText(text: String, title: String = "Share via") {
+        try {
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, text)
+            }
+            context.startActivity(Intent.createChooser(intent, title))
+        } catch (e: Exception) {
+            Toast.makeText(context, "Sharing failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun shareViaWhatsApp(message: String) {
+        try {
+            val encodedMsg = URLEncoder.encode(message, "UTF-8")
+            val url = "https://wa.me/?text=$encodedMsg"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            try {
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    setPackage("com.whatsapp")
+                    putExtra(Intent.EXTRA_TEXT, message)
+                }
+                context.startActivity(intent)
+            } catch (e2: Exception) {
+                shareText(message)
+            }
+        }
+    }
+
     Crossfade(
         targetState = showSplashScreen,
         animationSpec = tween(durationMillis = 450),
@@ -401,7 +433,8 @@ fun MainAppScreen(viewModel: ChemicalViewModel) {
                         onWhatsAppClick = { openWhatsApp("Hello Nirmaladevi Care, I would like to know more about your company and chemical products.") },
                         onCallNumber = { num -> makePhoneCall(num) },
                         onWhatsAppNumber = { num, msg -> openWhatsApp(msg, num) },
-                        onShareWhatsAppMessage = { msg -> openWhatsApp(msg) },
+                        onShareWhatsAppMessage = { msg -> shareViaWhatsApp(msg) },
+                        onShareText = { msg -> shareText(msg) },
                         onEmailClick = { sendEmail("Business Inquiry", "Dear Nirmaladevi Care Team,\n\nWe would like to inquire about your chemical trading supplies.") },
                         onOpenMapClick = { openGoogleMaps() },
                         onOpenDepotMap = { url, fallback -> openGoogleMaps(url, fallback) },
